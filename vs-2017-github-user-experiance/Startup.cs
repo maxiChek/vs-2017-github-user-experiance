@@ -1,5 +1,6 @@
 using Microsoft.AspNetCore.Builder;
 using Microsoft.AspNetCore.Hosting;
+using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.HttpsPolicy;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
@@ -45,12 +46,21 @@ namespace vs_2017_github_user_experiance
 
             app.UseRouting();
 
-            app.UseAuthorization();
+            //app.UseAuthorization();
 
             app.UseEndpoints(endpoints =>
             {
-                endpoints.MapRazorPages();
+                //endpoints.MapRazorPages();
+                endpoints.MapGet("/", async context =>
+                {
+                    await context.Response.WriteAsync("Hello first change");
+                });
             });
+        }
+
+        private Task async(HttpContext context)
+        {
+            throw new NotImplementedException();
         }
     }
 }
